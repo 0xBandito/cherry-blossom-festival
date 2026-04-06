@@ -1,9 +1,13 @@
+/* ===== DEVICE DETECTION ===== */
+const isMobile = window.innerWidth < 768;
+
 /* ===== CONSTANTS ===== */
 const FRAME_COUNT = 241;
 const FRAME_SPEED = 2.0;
-const IMAGE_SCALE = 0.86;
+const IMAGE_SCALE = isMobile ? 0.92 : 0.86;
 const FRAME_PATH = "frames/frame_";
 const FRAME_EXT = ".jpg";
+const FRAME_STEP = isMobile ? 2 : 1; // Skip every other frame on mobile
 
 /* ===== STATE ===== */
 const frames = [];
@@ -20,7 +24,7 @@ const loaderPercent = document.getElementById("loader-percent");
 
 /* ===== CANVAS SIZING ===== */
 function resizeCanvas() {
-  const dpr = window.devicePixelRatio || 1;
+  const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 2 : 3);
   canvas.width = window.innerWidth * dpr;
   canvas.height = window.innerHeight * dpr;
   canvas.style.width = window.innerWidth + "px";
@@ -138,36 +142,51 @@ async function preloadFrames() {
     loaderPercent.textContent = pct + "%";
   }
 
+  // Build list of frames to load (skip every other on mobile)
+  const framesToLoad = [];
+  for (let i = 1; i <= FRAME_COUNT; i += FRAME_STEP) {
+    framesToLoad.push(i);
+  }
+  const totalToLoad = framesToLoad.length;
+
+  function updateProgressMobile() {
+    loaded++;
+    const pct = Math.round((loaded / totalToLoad) * 100);
+    loaderBar.style.width = pct + "%";
+    loaderPercent.textContent = pct + "%";
+  }
+
   // Phase 1: load first 10 frames fast
-  for (let i = 1; i <= Math.min(10, FRAME_COUNT); i++) {
+  const firstBatch = framesToLoad.slice(0, 10);
+  for (const i of firstBatch) {
     await loadImage(i);
-    updateProgress();
+    updateProgressMobile();
   }
 
   // Draw first frame immediately
-  if (frames[1]) {
-    updateBgColor(frames[1]);
-    drawFrame(1);
+  const firstFrame = framesToLoad[0];
+  if (frames[firstFrame]) {
+    updateBgColor(frames[firstFrame]);
+    drawFrame(firstFrame);
   }
 
   // Phase 2: load remaining in parallel batches
-  const batchSize = 20;
-  for (let start = 11; start <= FRAME_COUNT; start += batchSize) {
-    const end = Math.min(start + batchSize, FRAME_COUNT + 1);
-    const promises = [];
-    for (let i = start; i < end; i++) {
-      promises.push(loadImage(i).then(updateProgress));
-    }
-    await Promise.all(promises);
+  const remaining = framesToLoad.slice(10);
+  const batchSize = isMobile ? 10 : 20;
+  for (let s = 0; s < remaining.length; s += batchSize) {
+    const batch = remaining.slice(s, s + batchSize);
+    await Promise.all(batch.map((i) => loadImage(i).then(updateProgressMobile)));
   }
 }
 
 /* ===== LENIS SMOOTH SCROLL ===== */
 function initLenis() {
   const lenis = new Lenis({
-    duration: 1.2,
+    duration: isMobile ? 1.0 : 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
+    touchMultiplier: isMobile ? 1.8 : 1,
+    wheelMultiplier: 1,
   });
 
   lenis.on("scroll", ScrollTrigger.update);
@@ -207,8 +226,13 @@ function initScrollFrames() {
     scrub: true,
     onUpdate: (self) => {
       const accelerated = Math.min(self.progress * FRAME_SPEED, 1);
-      const index = Math.max(1, Math.min(Math.floor(accelerated * FRAME_COUNT), FRAME_COUNT));
-      if (index !== currentFrame) {
+      let index = Math.max(1, Math.min(Math.floor(accelerated * FRAME_COUNT), FRAME_COUNT));
+      // Snap to nearest loaded frame on mobile
+      if (FRAME_STEP > 1) {
+        index = Math.round((index - 1) / FRAME_STEP) * FRAME_STEP + 1;
+        index = Math.max(1, Math.min(index, FRAME_COUNT));
+      }
+      if (index !== currentFrame && frames[index]) {
         currentFrame = index;
         requestAnimationFrame(() => drawFrame(currentFrame));
 

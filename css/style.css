@@ -440,6 +440,24 @@ a {
   color: var(--bg-light);
 }
 
+/* ===== TABLET ===== */
+@media (max-width: 1024px) {
+  .align-left {
+    padding-left: 5vw;
+    padding-right: 45vw;
+  }
+
+  .align-right {
+    padding-left: 45vw;
+    padding-right: 5vw;
+  }
+
+  .align-left .section-inner,
+  .align-right .section-inner {
+    max-width: 50vw;
+  }
+}
+
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
   #scroll-container {
@@ -447,13 +465,24 @@ a {
   }
 
   .hero-heading {
-    font-size: clamp(3rem, 14vw, 5.5rem);
+    font-size: clamp(3.2rem, 14vw, 5.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    margin-bottom: 1rem;
   }
 
   .align-left,
   .align-right {
-    padding-left: 6vw;
-    padding-right: 6vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
   }
 
   .align-left .section-inner,
@@ -462,14 +491,39 @@ a {
   }
 
   .section-content .section-inner {
-    background: rgba(223, 229, 236, 0.85);
-    padding: 2rem;
-    border-radius: 4px;
+    background: rgba(223, 229, 236, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 1.8rem;
+    border-radius: 6px;
+  }
+
+  .section-heading {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+  }
+
+  .section-body {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    max-width: 100%;
   }
 
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 2rem 1.5rem;
+    padding: 0 2vw;
+  }
+
+  .stat-number {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .stat-suffix {
+    font-size: 0.9rem;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
   }
 
   .header-links {
@@ -483,19 +537,61 @@ a {
   .site-header {
     padding: 1rem 4vw;
   }
+
+  .cta-button {
+    padding: 1rem 2.2rem;
+    font-size: 0.8rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .scroll-indicator {
+    bottom: 2rem;
+  }
+
+  /* Ensure stats text is white on dark overlay */
+  .section-stats .section-inner {
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 @media (max-width: 480px) {
   .hero-heading {
-    font-size: clamp(2.5rem, 16vw, 4rem);
+    font-size: clamp(2.5rem, 15vw, 3.8rem);
   }
 
   .section-heading {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+  }
+
+  .section-body {
+    font-size: 0.85rem;
   }
 
   .stats-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 1.5rem 1rem;
+  }
+
+  .stat-number {
+    font-size: clamp(1.8rem, 10vw, 2.5rem);
+  }
+
+  .section-content .section-inner {
+    padding: 1.4rem;
+  }
+}
+
+/* ===== TOUCH DEVICE HOVER FIX ===== */
+@media (hover: none) {
+  .cta-primary:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .cta-secondary:hover {
+    background: transparent;
+    color: var(--text-on-light);
   }
 }
