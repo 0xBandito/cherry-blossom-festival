@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>International Cherry Blossom Festival — Macon, Georgia</title>
+  <meta name="description" content="Experience the bloom of 350,000+ Yoshino cherry trees at the International Cherry Blossom Festival in Macon, Georgia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-brand">Cherry Blossom Festival</div>
+    <div class="loader-track">
+      <div id="loader-bar"></div>
+    </div>
+    <div id="loader-percent">0%</div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="site-header">
+    <nav>
+      <a href="#" class="header-logo">ICBF</a>
+      <div class="header-links">
+        <a href="#heritage">Heritage</a>
+        <a href="#experience">Experience</a>
+        <a href="#plan">Plan</a>
+        <a href="#attend">Attend</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero (standalone 100vh) -->
+  <section class="hero-standalone" id="hero">
+    <div class="hero-content">
+      <span class="section-label">International Cherry Blossom Festival</span>
+      <h1 class="hero-heading">
+        <span class="hero-word">Where</span>
+        <span class="hero-word">350,000</span>
+        <span class="hero-word">Trees</span>
+        <span class="hero-word">Bloom</span>
+      </h1>
+      <p class="hero-tagline">Macon, Georgia &mdash; March 2027</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+        <path d="M8 0v20M1 14l7 7 7-7" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Canvas (fixed, full viewport) -->
+  <div class="canvas-wrap" id="canvas-wrap">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <!-- Dark Overlay -->
+  <div id="dark-overlay"></div>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap" id="marquee-wrap" data-scroll-speed="-25">
+    <div class="marquee-text">Cherry Blossom Festival &nbsp;&bull;&nbsp; Cherry Blossom Festival &nbsp;&bull;&nbsp; Cherry Blossom Festival</div>
+  </div>
+
+  <!-- Scroll Container -->
+  <div id="scroll-container">
+
+    <!-- Section 1: Heritage -->
+    <section class="scroll-section section-content align-left"
+             id="heritage"
+             data-enter="22" data-leave="38" data-animation="slide-left">
+      <div class="section-inner">
+        <span class="section-label">001 / Heritage</span>
+        <h2 class="section-heading">The Cherry Blossom Capital of the World</h2>
+        <p class="section-body">Since 1982, Macon has celebrated the breathtaking bloom of over 350,000 Yoshino cherry trees&mdash;more than any other city on earth. What began as a community celebration has grown into ten days of art, music, food, and natural wonder that draws visitors from across the globe.</p>
+      </div>
+    </section>
+
+    <!-- Section 2: Experience -->
+    <section class="scroll-section section-content align-right"
+             id="experience"
+             data-enter="40" data-leave="54" data-animation="fade-up">
+      <div class="section-inner">
+        <span class="section-label">002 / Experience</span>
+        <h2 class="section-heading">Ten Days of Wonder</h2>
+        <p class="section-body">From the Pink Parade through historic downtown to live concerts under canopies of blossoms, the festival transforms Macon into a celebration of spring itself. Enjoy curated art exhibitions, chef-driven food experiences, family activities, and twilight garden tours.</p>
+        <a href="#" class="section-note">View Full Program &rarr;</a>
+      </div>
+    </section>
+
+    <!-- Section 3: Stats -->
+    <section class="scroll-section section-stats"
+             id="stats"
+             data-enter="56" data-leave="72" data-animation="stagger-up">
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-number" data-value="350000" data-decimals="0">0</span>
+          <span class="stat-suffix">+</span>
+          <span class="stat-label">Yoshino Cherry Trees</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="43" data-decimals="0">0</span>
+          <span class="stat-suffix">years</span>
+          <span class="stat-label">Festival Editions</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="500" data-decimals="0">0</span>
+          <span class="stat-suffix">K+</span>
+          <span class="stat-label">Annual Visitors</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="10" data-decimals="0">0</span>
+          <span class="stat-suffix">days</span>
+          <span class="stat-label">Of Celebration</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Plan -->
+    <section class="scroll-section section-content align-left"
+             id="plan"
+             data-enter="74" data-leave="86" data-animation="clip-reveal">
+      <div class="section-inner">
+        <span class="section-label">004 / Plan</span>
+        <h2 class="section-heading">March 14&ndash;23, 2027</h2>
+        <p class="section-body">Opening ceremonies begin at Carolyn Crayton Park with the crowning of the Cherry Blossom Queen. Ten days of concerts, parades, 5K runs, hot air balloon rallies, and community gatherings follow. Most events are free and open to the public.</p>
+        <a href="#" class="cta-button cta-secondary">Download Schedule</a>
+      </div>
+    </section>
+
+    <!-- Section 5: Attend (CTA, persists) -->
+    <section class="scroll-section section-content align-right"
+             id="attend"
+             data-enter="88" data-leave="100" data-animation="scale-up"
+             data-persist="true">
+      <div class="section-inner">
+        <span class="section-label">005 / Attend</span>
+        <h2 class="section-heading">Experience the Bloom</h2>
+        <p class="section-body">Join hundreds of thousands of visitors in Macon, Georgia for the most spectacular natural display in the American South.</p>
+        <a href="#" class="cta-button cta-primary">Plan Your Visit</a>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
